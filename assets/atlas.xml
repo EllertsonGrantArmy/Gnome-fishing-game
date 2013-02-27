@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:afe65f8de0d04dce94e3dc5aba693f3b$ -->
+<TextureAtlas imagePath="atlas.png">
+    <SubTexture name="bait" x="2" y="2" width="34" height="9"/>
+    <SubTexture name="fishSketch" x="2" y="13" width="688" height="296"/>
+</TextureAtlas>
