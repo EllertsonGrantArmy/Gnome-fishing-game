@@ -6,7 +6,7 @@ package core
 	import starling.events.Event;
 	
 	import states.Menu;
-	import states.Calibrate;
+	import states.CalibrateMenu;
 	import states.Map;
 	import states.Play;
 	import states.GameOver;
@@ -52,7 +52,7 @@ package core
 					current_state = new Menu(this);
 					break;
 				case CALIBRATE_STATE:
-					current_state = new Calibrate(this);
+					current_state = new CalibrateMenu(this);
 					break;
 				case MAP_STATE:
 					current_state = new Map(this);
