@@ -30,6 +30,7 @@ package managers
     private var bmd:BitmapData;
     private var texture:Texture;
     private var img:Image;
+    private var dist:int;
     
     public function BaitManager(play:Play)
     {
@@ -41,7 +42,6 @@ package managers
     {
       updateInterval += 1;
       
-      
       if(bait.x > 400 && bait.x < 600)
       {
         bait.vy -= 1;
@@ -51,25 +51,16 @@ package managers
         cast = false;
       }
       
+      //position line when casting
       if(cast == true && updateInterval == 0)
       {
         bait.x += bait.vx;
         bait.vy += gravity;
         bait.y += bait.vy;
-        trace(bait.x + " | " + bait.y);
         
-        baitLine.graphics.clear();
-        bmd = null;
-        
-        baitLine.graphics.lineStyle(1, 0x000000, 1);
-        baitLine.graphics.moveTo(25,25);
-        baitLine.graphics.lineTo(bait.x,bait.y);
-        
-        bmd = new BitmapData(700,700,true, 0x000000);
-        bmd.draw(baitLine);
-        
-        texture = Texture.fromBitmapData(bmd);
-        img.texture = texture;
+        dist = Math.sqrt((bait.x - 25)*(bait.x - 25) + (bait.y - 25)*(bait.y - 25));
+        img.scaleX = dist;
+        img.rotation = Math.atan2(bait.y, bait.x)
       } else if(updateInterval == 1) {updateInterval = -1;}
     }
     
@@ -92,17 +83,20 @@ package managers
       bait.y = 25;
       play.addChild(bait);
       
+      //create fising line img
       baitLine = new flash.display.Sprite();
-      baitLine.graphics.lineStyle(1, 0x000000, 1);
-      baitLine.graphics.moveTo(25,25);
-      baitLine.graphics.lineTo(25,25);
+      baitLine.graphics.beginFill(0x000000, 1);
+      baitLine.graphics.drawRect(0, 0, 1, 1);
+      baitLine.graphics.endFill();
       
-      bmd = new BitmapData(700,700,true, 0x000000);
+      bmd = new BitmapData(1, 1, true, 0x000000);
       bmd.draw(baitLine);
-      
       texture = Texture.fromBitmapData(bmd);
+      
       img = new Image(texture);
-      play.addChild(img);
+      img.x = 25;
+      img.y = 25;
+      play.addChild(img)
     }    
   }
 }

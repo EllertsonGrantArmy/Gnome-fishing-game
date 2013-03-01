@@ -11,7 +11,7 @@ package core
 		{
 			var star:Starling = new Starling(Game, stage);
       star.showStats = true;
-			star.start();
+      star.start();
 		}
 	}
 }
