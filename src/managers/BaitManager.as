@@ -10,6 +10,9 @@ package managers
   
   import objects.Bait;
   
+  import starling.animation.Transitions;
+  import starling.animation.Tween;
+  import starling.core.Starling;
   import starling.display.Image;
   import starling.events.Event;
   import starling.textures.Texture;
@@ -19,7 +22,7 @@ package managers
   public class BaitManager implements IState
   {
     private var play:Play;
-    private var bait:Bait;
+    public var bait:Bait;
     private var vx:int;
     private var vy:int;
     private var gravity:int = 2;
@@ -31,6 +34,8 @@ package managers
     private var texture:Texture;
     private var img:Image;
     private var dist:int;
+    private var slope:Number;
+    private var tween:Tween;
     
     public function BaitManager(play:Play)
     {
@@ -58,10 +63,11 @@ package managers
         bait.vy += gravity;
         bait.y += bait.vy;
         
-        dist = Math.sqrt((bait.x - 25)*(bait.x - 25) + (bait.y - 25)*(bait.y - 25));
-        img.scaleX = dist;
-        img.rotation = Math.atan2(bait.y, bait.x)
+        
       } else if(updateInterval == 1) {updateInterval = -1;}
+      dist = Math.sqrt((bait.x - 25)*(bait.x - 25) + (bait.y - 25)*(bait.y - 25));
+      img.scaleX = dist;
+      img.rotation = Math.atan2(bait.y, bait.x)
     }
     
     public function destroy():void
@@ -74,6 +80,16 @@ package managers
       bait.vx = vx;
       bait.vy = vy;
       cast = true;
+    }
+    
+    public function reelBait():void
+    {
+      slope = (bait.y - 0)/(bait.x-0);
+      trace("Slope: " + slope);
+      tween = new Tween(bait,.5, Transitions.EASE_OUT);
+      tween.animate("x", bait.x - 25);
+      tween.animate("y", bait.y - 25);
+      Starling.juggler.add(tween);
     }
     
     private function spawn():void

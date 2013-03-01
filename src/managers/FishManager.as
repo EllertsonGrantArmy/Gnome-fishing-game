@@ -14,7 +14,7 @@ package managers
 	public class FishManager implements IState
 	{
 		private var play:Play;
-		private var fish:Array;
+		public var fish:Array;
 		private var pool:StarlingPool;
 		private var fishNum:int;
 		public function FishManager(play:Play, fishNum:int)

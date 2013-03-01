@@ -44,7 +44,14 @@ package states
 		{
       trace("casting");
 			baitManager.castBait(20,-8);
+      ns.removeEventListener(MouseEvent.MOUSE_DOWN, cast);
+      ns.addEventListener(MouseEvent.MOUSE_DOWN, reel);
 		}
+    
+    private function reel(event:MouseEvent):void
+    {
+      baitManager.reelBait();
+    }
 		
 		public function update():void
 		{
