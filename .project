@@ -14,16 +14,4 @@
 	<natures>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>[source path] com</name>
-			<type>2</type>
-			<location>C:/Users/Jordan/SkyDrive/As3 Extensions/com</location>
-		</link>
-		<link>
-			<name>[source path] src</name>
-			<type>2</type>
-			<location>C:/Users/Jordan/SkyDrive/As3 Extensions/PrimaryFeather-Starling-Framework-2a42a8e/starling/src</location>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -5,11 +5,11 @@ package core
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
-	import states.Menu;
 	import states.CalibrateMenu;
-	import states.Map;
-	import states.Play;
 	import states.GameOver;
+	import states.Map;
+	import states.Menu;
+	import states.Play;
 	
 	public class Game extends Sprite
 	{
