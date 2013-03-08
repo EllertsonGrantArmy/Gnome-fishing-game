@@ -1,3 +1,6 @@
 [submodule "starling"]
 	path = starling
 	url = git@github.com:PrimaryFeather/Starling-Framework.git
+[submodule "starling-graphics"]
+	path = starling-graphics
+	url = git@github.com:unwrong/Starling-Extension-Graphics.git

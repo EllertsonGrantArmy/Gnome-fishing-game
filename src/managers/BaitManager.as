@@ -14,6 +14,7 @@ package managers
   import starling.animation.Tween;
   import starling.core.Starling;
   import starling.display.Image;
+  import starling.display.Shape;
   import starling.events.Event;
   import starling.textures.Texture;
   
@@ -28,14 +29,8 @@ package managers
     private var gravity:int = 2;
     public var cast:Boolean = false;
     private var updateInterval:int = -1;
-    private var baitLine:flash.display.Sprite;
-    private var bitmap1:Bitmap;
-    private var bmd:BitmapData;
-    private var texture:Texture;
-    private var img:Image;
-    private var dist:int;
-    private var slope:Number;
-    private var tween:Tween;
+    private var line:Shape;
+    private var line_color:uint = 0x00000;
     
     public function BaitManager(play:Play)
     {
@@ -65,11 +60,19 @@ package managers
         
         
       } else if(updateInterval == 1) {updateInterval = -1;}
-      dist = Math.sqrt((bait.x - 25)*(bait.x - 25) + (bait.y - 25)*(bait.y - 25));
-      img.scaleX = dist;
-      img.rotation = Math.atan2(bait.y, bait.x)
+				
+			drawLine();
     }
-    
+		
+		private function drawLine():void{
+			line.graphics.clear();
+			line.graphics.beginFill(line_color);
+			line.graphics.lineStyle(2, line_color);
+			line.graphics.moveTo(110, 0);
+			line.graphics.lineTo(bait.x, bait.y);
+			line.graphics.endFill();
+		}
+		
     public function destroy():void
     {
       
@@ -84,9 +87,9 @@ package managers
     
     public function reelBait():void
     {
-      slope = (bait.y - 0)/(bait.x-0);
+      var slope:Number = (bait.y - 0)/(bait.x-0);
       trace("Slope: " + slope);
-      tween = new Tween(bait,.5, Transitions.EASE_OUT);
+      var tween:Tween = new Tween(bait,.5, Transitions.EASE_OUT);
       tween.animate("x", bait.x - 25);
       tween.animate("y", bait.y - 25);
       Starling.juggler.add(tween);
@@ -98,21 +101,9 @@ package managers
       bait.x = 25;
       bait.y = 25;
       play.addChild(bait);
-      
-      //create fising line img
-      baitLine = new flash.display.Sprite();
-      baitLine.graphics.beginFill(0x000000, 1);
-      baitLine.graphics.drawRect(0, 0, 1, 1);
-      baitLine.graphics.endFill();
-      
-      bmd = new BitmapData(1, 1, true, 0x000000);
-      bmd.draw(baitLine);
-      texture = Texture.fromBitmapData(bmd);
-      
-      img = new Image(texture);
-      img.x = 25;
-      img.y = 25;
-      play.addChild(img)
+			
+			line = new Shape();
+			play.addChild(line);
     }    
   }
 }
