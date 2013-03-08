@@ -1,9 +1,6 @@
 package managers
 {
-	import com.citrusengine.objects.platformer.nape.Enemy;
 	import com.leebrimelow.starling.StarlingPool;
-	
-	import core.Assets;
 	
 	import interfaces.IState;
 	
