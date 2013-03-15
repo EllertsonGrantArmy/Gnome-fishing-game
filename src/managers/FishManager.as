@@ -6,6 +6,8 @@ package managers
 	
 	import objects.Fish;
 	
+	import starling.display.Sprite;
+	
 	import states.Play;
 
 	public class FishManager implements IState
@@ -34,12 +36,23 @@ package managers
 				f.x += f.vx;
 				if(f.x >= f.rBound){
 					f.vx = -f.vx;
+          flipFish(f, "RIGHT");
 				}	else if(f.x <= f.lBound) 
         {
 					f.vx = -f.vx;
+          flipFish(f, "LEFT");
 				}
 			}
 		}
+    private function flipFish(fishy:Fish, lr:String):void {
+      if(lr == "LEFT"){
+        fishy.scaleX = -0.25;
+        fishy.x += fishy.width/2;
+      } else if(lr == "RIGHT") {
+        fishy.scaleX = 0.25;
+        fishy.x -= fishy.width/2;
+      }
+    }
 		
 		public function destroy():void
 		{
@@ -60,8 +73,8 @@ package managers
 				e.x = 400;
 				fish.push(e);
 				play.addChild(e);
+        flipFish(e, "LEFT");
 			}
-			
 		}
 	}
 }

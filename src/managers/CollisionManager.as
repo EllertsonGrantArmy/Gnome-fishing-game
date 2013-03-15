@@ -16,6 +16,7 @@ package managers
     private var b:Point;
     private var updateInterval:int = -1;
     private var baitCast:Boolean = false;
+    private var callOnce:Boolean;
     
     public function CollisionManager(play:Play)
     {
@@ -26,8 +27,7 @@ package managers
     public function update():void
     {
       updateInterval++;
-      //TODO don't allow collison until cast is complete
-      if(updateInterval == 0) 
+      if(updateInterval == 0 && play.baitManager.isCast == true) 
       {
         a = new Point(play.baitManager.bait.x, play.baitManager.bait.y);
         
@@ -39,10 +39,21 @@ package managers
         
         if(Math.abs(a.x - b.x) <= 20 && Math.abs(a.y - b.y) <= 20) 
         {
-          trace("touching");
+          
+          if(callOnce == true){
+            callOnce = false;  
+            if(Math.floor(Math.random()*5) == 1) {
+              trace("bite");
+            } else {
+              trace("no bite");
+            }
+          }
+        } else {
+          callOnce = true;
         }
-      } else if(updateInterval == 1) {updateInterval = -1;}
-      
+      } else if(updateInterval == 1) {
+        updateInterval = -1;
+      }
     }
     
     public function destroy():void

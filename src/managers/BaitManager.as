@@ -18,10 +18,11 @@ package managers
     private var vx:int;
     private var vy:int;
     private var gravity:int = 2;
-    public var cast:Boolean = false;
+    private var casting:Boolean = false;
     private var updateInterval:int = -1;
     private var line:Shape;
     private var line_color:uint = 0x00000;
+    public var isCast:Boolean = false;
     
     public function BaitManager(play:Play)
     {
@@ -39,11 +40,12 @@ package managers
       } 
       if(bait.x > 600 || bait.y > 600)
       {
-        cast = false;
+        casting = false;
+        isCast = true;
       }
       
       //position line when casting
-      if(cast == true && updateInterval == 0)
+      if(casting == true && updateInterval == 0)
       {
         bait.x += bait.vx;
         bait.vy += gravity;
@@ -74,7 +76,7 @@ package managers
     {
       bait.vx = vx;
       bait.vy = vy;
-      cast = true;
+      casting = true;
     }
     
     public function reelBait():void
