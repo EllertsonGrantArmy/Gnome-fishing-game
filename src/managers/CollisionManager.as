@@ -1,6 +1,9 @@
 package managers
 {
+  import flash.events.TimerEvent;
   import flash.geom.Point;
+  import flash.sampler.stopSampling;
+  import flash.utils.Timer;
   
   import interfaces.IState;
   
@@ -17,6 +20,7 @@ package managers
     private var updateInterval:int = -1;
     private var baitCast:Boolean = false;
     private var callOnce:Boolean;
+    private static const SET_HOOK_TIME:int = 2000;
     
     public function CollisionManager(play:Play)
     {
@@ -42,8 +46,9 @@ package managers
           
           if(callOnce == true){
             callOnce = false;  
-            if(Math.floor(Math.random()*5) == 1) {
+            if(Math.floor(Math.random()*3) == 1) {
               trace("bite");
+              biting();
             } else {
               trace("no bite");
             }
@@ -54,6 +59,18 @@ package managers
       } else if(updateInterval == 1) {
         updateInterval = -1;
       }
+    }
+    
+    private function biting():void {
+      play.pauseGame();
+      var timer:Timer=new Timer(SET_HOOK_TIME,1);
+      timer.addEventListener(TimerEvent.TIMER, biteOver);
+      timer.start();
+    }
+    
+    protected function biteOver(event:TimerEvent):void {
+      // TODO Auto-generated method stub
+      play.resumeGame();
     }
     
     public function destroy():void

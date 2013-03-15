@@ -25,6 +25,7 @@ package states
 		public var fishManager:FishManager;
 		public var baitManager:BaitManager;
 		private var collisionManager:CollisionManager;
+		private var pause:Boolean;
 		
 		public function Play(game:Game)
 		{
@@ -58,11 +59,20 @@ package states
 		
 		public function update():void
 		{
-			fishManager.update();
-			baitManager.update();
-      collisionManager.update();
+      if(pause != true) {
+  			fishManager.update();
+  			baitManager.update();
+        collisionManager.update();
+      }
 		}
+    
+    public function pauseGame():void {
+      pause = true;
+    }
 		
+    public function resumeGame():void {
+      pause = false;
+    }
 		public function destroy():void
 		{
 		}
