@@ -13,7 +13,6 @@ package objects
 		public function Fish()
 		{
 			super(Assets.ta.getTextures("fishSketch"));
-			pivotX = width/2;
 			pivotY = height/2;
 		}
 		

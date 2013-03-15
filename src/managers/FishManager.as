@@ -34,7 +34,8 @@ package managers
 				f.x += f.vx;
 				if(f.x >= f.rBound){
 					f.vx = -f.vx;
-				}	else if(f.x <= f.lBound) {
+				}	else if(f.x <= f.lBound) 
+        {
 					f.vx = -f.vx;
 				}
 			}

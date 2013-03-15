@@ -8,6 +8,7 @@ package states
 	import interfaces.IState;
 	
 	import managers.BaitManager;
+	import managers.CollisionManager;
 	import managers.FishManager;
 	
 	import starling.core.Starling;
@@ -21,8 +22,9 @@ package states
 		private var game:Game;
 		private var castState:Boolean = false;
 		private var ns:Stage;
-		private var fishManager:FishManager;
-		private var baitManager:BaitManager;
+		public var fishManager:FishManager;
+		public var baitManager:BaitManager;
+		private var collisionManager:CollisionManager;
 		
 		public function Play(game:Game)
 		{
@@ -36,8 +38,9 @@ package states
 			ns.addEventListener(MouseEvent.MOUSE_DOWN, cast);
       
 			fishManager = new FishManager(this, 1);
-			
 			baitManager = new BaitManager(this);
+      collisionManager = new CollisionManager(this);
+      
 		}
 		
 		private function cast(event:MouseEvent):void
@@ -57,6 +60,7 @@ package states
 		{
 			fishManager.update();
 			baitManager.update();
+      collisionManager.update();
 		}
 		
 		public function destroy():void

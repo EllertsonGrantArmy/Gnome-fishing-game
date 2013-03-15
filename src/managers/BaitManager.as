@@ -1,11 +1,5 @@
 package managers
 {
-  import core.Assets;
-  
-  import flash.display.Bitmap;
-  import flash.display.BitmapData;
-  import flash.display.Sprite;
-  
   import interfaces.IState;
   
   import objects.Bait;
@@ -13,10 +7,7 @@ package managers
   import starling.animation.Transitions;
   import starling.animation.Tween;
   import starling.core.Starling;
-  import starling.display.Image;
   import starling.display.Shape;
-  import starling.events.Event;
-  import starling.textures.Texture;
   
   import states.Play;
   
@@ -40,7 +31,7 @@ package managers
     
     public function update():void
     {
-      updateInterval += 1;
+      updateInterval++;
       
       if(bait.x > 400 && bait.x < 600)
       {
@@ -64,7 +55,8 @@ package managers
 			drawLine();
     }
 		
-		private function drawLine():void{
+		private function drawLine():void
+    {
 			line.graphics.clear();
 			line.graphics.beginFill(line_color);
 			line.graphics.lineStyle(2, line_color);
